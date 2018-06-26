@@ -1,1 +1,54 @@
-# L1AE
+# Overview
+The source code is provided to reproduce our experimental results in the paper. It contains four parts:
+1. Core codebase
+   - model.py
+   - utils.py
+   - datasets.py
+   - baselines.py
+2. Code for each dataset
+   - synthetic_main.py
+   - synthetic_powerlaw_main.py
+   - amazon_main.py
+   - amazon_parallel_l1.py
+   - rcv1_main.py
+   - rcv_parallel_l1.py
+3. Scripts for reproducing our results
+   - scripts/synthetic1.sh
+   - scripts/synthetic2.sh
+   - scripts/amazon.sh
+   - scripts/rcv1.sh
+   - scripts/synthetic_powerlaw.sh
+4. Code and scripts for one of the baselines `Simple AE + l1-min`
+   - synthetic_simpleAE.py
+   - amazon_simpleAE.py
+   - rcv1_simpleAE.py
+   - scripts are under simpleAE_scripts/
+
+
+# Run
+To reproduce our experimental results, first run `chmod +x scripts/*.sh` to make the scripts executable, then simply run the scripts, e.g.,
+- `$ ./scripts/synthetic1.sh`
+- `$ ./scripts/synthetic2.sh`
+- `$ ./scripts/amazon.sh`
+- `$ ./scripts/rcv1.sh`
+- `$ ./scripts/synthetic_powerlaw.sh`
+
+Note:
+1. The results are stored in a python dictionary which is then saved under the folder `ckpts/`. You will be able to reproduce Figure 3 and Figure 4 (in our paper) using those results.
+2. Before running `amazon.sh`, download `train.csv` from https://www.kaggle.com/c/amazon-employee-access-challenge/data
+ and specify its location via --data_dir.
+3. The RCV1 dataset will be fetched automatically using the `sklearn.datasets.fetch_rcv1` function.
+4. To reproduce results of one of the baselines `Simple AE + l1-min`, run scripts under the folder simpleAE_scripts/.
+5. For high-dimensional vectors, solving `l1-min` using Gurobi takes a long time on a single CPU. To overcome this limitation, in `amazon_main.py` and `rcv1_main.py`, performance evaluation is performed on a small set of the test samples (while training is still done using the complete training set). After training the autoencoder, we then use a multi-core machine and solve `l1_min` in parallel on the complete test set using `amazon_parallel_l1.py` and `rcv1_parallel_l1.py`. Depending on your multi-core machine, solving `l1_min` in parallel on the *complete* test set may still take a long time, I would recommend running `amazon_parallel_l1.py` and `rcv1_parallel_l1.py` first with a small subset (by setting a small number for the parameters `num_core` and `batch` in the python file).  
+
+
+# Environment
+Here is our software environment. If you use a older version of some libraries, it should be fine most of the time.
+
+1. Python 2.7.12
+   - numpy 1.13.3
+   - sklearn 0.19.1
+   - scipy 1.0.0
+   - joblib 0.10.0
+2. Tensorflow r1.4
+3. Gurobi 7.5.1
