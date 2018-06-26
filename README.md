@@ -1,6 +1,6 @@
 # Overview
 The source code is provided to reproduce our experimental results in the paper. It contains four parts:
-1. Core codebase
+1. Core
    - model.py
    - utils.py
    - datasets.py
