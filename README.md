@@ -1,5 +1,5 @@
 # Overview
-The source code is provided to reproduce our experimental results in the paper. It contains four parts:
+The source code is provided to reproduce our experimental results in the paper "The Sparse Recovery Autoencoder" (https://arxiv.org/abs/1806.10175). It contains four parts:
 1. Core
    - model.py
    - utils.py
