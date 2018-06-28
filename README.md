@@ -1,5 +1,5 @@
 # Overview
-The source code is provided to reproduce our experimental results in the paper "The Sparse Recovery Autoencoder" (https://arxiv.org/abs/1806.10175). It contains four parts:
+Code for our paper ["The Sparse Recovery Autoencoder"](https://arxiv.org/abs/1806.10175). It contains four parts:
 1. Core
    - model.py
    - utils.py
@@ -35,8 +35,7 @@ To reproduce our experimental results, first run `chmod +x scripts/*.sh` to make
 
 Note:
 1. The results are stored in a python dictionary which is then saved under the folder `ckpts/`. You will be able to reproduce Figure 3 and Figure 4 (in our paper) using those results.
-2. Before running `amazon.sh`, download `train.csv` from https://www.kaggle.com/c/amazon-employee-access-challenge/data
- and specify its location via --data_dir.
+2. Before running `amazon.sh`, download `train.csv` from [this kaggle competition](https://www.kaggle.com/c/amazon-employee-access-challenge/data) and specify its location via --data_dir.
 3. The RCV1 dataset will be fetched automatically using the `sklearn.datasets.fetch_rcv1` function.
 4. To reproduce results of one of the baselines `Simple AE + l1-min`, run scripts under the folder simpleAE_scripts/.
 5. For high-dimensional vectors, solving `l1-min` using Gurobi takes a long time on a single CPU. To overcome this limitation, in `amazon_main.py` and `rcv1_main.py`, performance evaluation is performed on a small set of the test samples (while training is still done using the complete training set). After training the autoencoder, we then use a multi-core machine and solve `l1_min` in parallel on the complete test set using `amazon_parallel_l1.py` and `rcv1_parallel_l1.py`. Depending on your multi-core machine, solving `l1_min` in parallel on the *complete* test set may still take a long time, I would recommend running `amazon_parallel_l1.py` and `rcv1_parallel_l1.py` first with a small subset (by setting a small number for the parameters `num_core` and `batch` in the python file).  
