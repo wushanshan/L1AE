@@ -34,7 +34,7 @@ To reproduce our experimental results, first run `chmod +x scripts/*.sh` to make
 - `$ ./scripts/synthetic_powerlaw.sh`
 
 Note:
-1. The results are stored in a python dictionary which is then saved under the folder `ckpts/`. You will be able to reproduce Figure 3 and Figure 4 (in our paper) using those results.
+1. The results are stored in a python dictionary which is then saved under the folder `ckpts/`. They can be used to reproduce the figures shown in our paper.
 2. Before running `amazon.sh`, download `train.csv` from [this kaggle competition](https://www.kaggle.com/c/amazon-employee-access-challenge/data) and specify its location via --data_dir.
 3. The RCV1 dataset will be fetched automatically using the `sklearn.datasets.fetch_rcv1` function.
 4. To reproduce results of one of the baselines `Simple AE + l1-min`, run scripts under the folder simpleAE_scripts/.
