@@ -11,7 +11,7 @@ Code for our paper ["The Sparse Recovery Autoencoder"](https://arxiv.org/abs/180
    - amazon_main.py
    - amazon_parallel_l1.py
    - rcv1_main.py
-   - rcv_parallel_l1.py
+   - rcv1_parallel_l1.py
 3. Scripts for reproducing our results
    - scripts/synthetic1.sh
    - scripts/synthetic2.sh
