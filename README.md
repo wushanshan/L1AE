@@ -42,7 +42,7 @@ Note:
 
 
 # Environment
-Here is our software environment. If you use a older version of some libraries, it should be fine most of the time.
+Here is our software environment. 
 
 1. Python 2.7.12
    - numpy 1.13.3
