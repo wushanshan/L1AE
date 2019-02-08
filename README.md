@@ -1,5 +1,3 @@
-Code for our paper ["The Sparse Recovery Autoencoder"](https://arxiv.org/abs/1806.10175). 
-
 # Toy example
 Under the folder **toy_example**, we provide a jupyter notebook `jan22_toy_example.ipynb` that works through the training and evaluation of our autoencoder (as well as other baseline algorithms) for the synthetic1 dataset. We highly recommend interested readers to take a look before diving deep into our code.
 
