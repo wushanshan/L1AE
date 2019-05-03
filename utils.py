@@ -1,17 +1,3 @@
-# Copyright 2018 Shanshan Wu
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-# 
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 """Helper functions"""
 from __future__ import division
 from gurobipy import *
@@ -25,6 +11,21 @@ def prepareSparseTensor(input_csrMat):
     batch_indices = np.vstack(batch_indices).T.astype(np.int64)
     batch_values = batch_inputs.data.astype(np.float32)
     return batch_indices, batch_values, np.array(input_csrMat.shape)
+
+
+def LBCS(G, emb_dim, X_train, X_test):
+    """
+    Learning-based compressive subsampling (LBCS) method
+    proposed by Baldassarre et al., 2016.
+    """
+    num_train = X_train.shape[0]
+    Y_train = X_train.dot(G)
+    Y_test = X_test.dot(G)
+    col_energy = np.dot(np.ones([1, num_train]), Y_train**2)
+    sorted_indices = np.argsort(col_energy[0, :])
+    A = G[:, sorted_indices[-emb_dim:]]
+    Y_test = Y_test[:, sorted_indices[-emb_dim:]]
+    return A, Y_test
 
 
 def l1_min_err(A, y, true_x):
